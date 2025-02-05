@@ -1,0 +1,9 @@
+---
+title: Changing timer cooldown
+---
+
+In addition to standard logic gates, the plugin also includes custom gates such as the **TIMER gate** and **RS Latch**. The TIMER gate functions as an **oscillator**, periodically sending an output signal. Unlike other gates, it has no inputs—only a single output.
+
+By default, the TIMER gate generates a signal every second. This interval can be adjusted using the command `/logicgates timer <seconds>`. After entering the command and clicking on a TIMER gate, its oscillation interval will be updated to the specified number of seconds.
+
+If you need more precise timing (e.g., milliseconds instead of whole seconds), you can manually modify the cooldown value in the `gates.json` file. The timing values in this file are stored in milliseconds, allowing for finer control over the gate’s behavior.

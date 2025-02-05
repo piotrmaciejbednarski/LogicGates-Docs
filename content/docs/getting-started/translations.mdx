@@ -1,0 +1,43 @@
+---
+title: Translations
+---
+
+This section describes the plugin's translation system and how it supports internationalization. The plugin uses a YAML file **messages.yml** to store various messages that can be translated. The plugin has built-in **English**, which is the default language.
+
+## Message Structure
+
+The `messages.yml` file is organized by language codes (e.g., `en`, `pl`, `de`, `es`). Each language section contains key-value pairs, where the key identifies the message and the value is the translated text. Messages can include color codes (using the `&` character) for rich text formatting.
+
+```yaml
+messages:
+  en:
+    prefix: "&8[&6LogicGates&8] &r"
+    errors:
+      no_permission: "&cYou don't have permission!"
+      # ... other error messages
+    update_checker:
+      checking: "&6Checking for updates..."
+      # ... other update checker messages
+    gui_title: "&0Choose gate type"
+    # ... other messages
+```
+
+## Message Formatting
+
+If a message for the specified language is not found, the plugin falls back to the English translation (`messages.en.*`). If even the English translation is missing, a "Missing translation" message is displayed.
+
+The plugin retrieves the language-specific prefix (e.g., `&8[&6LogicGates&8] &r`) and prepends it to the translated message.
+
+`ChatColor.translateAlternateColorCodes('&', ...)` translates color codes (e.g., `&c` to red, `&6` to gold) into the format recognized by the server.
+
+## Internationalization
+
+To add support for a new language, simply create a new section in the **messages.yml** file with the corresponding language code (e.g., `es` for Spanish) and translate all the messages. Make sure your version of **messages.yml** is up-to-date. You can download it from the latest release on the GitHub repository.
+
+## File Initialization
+
+Plugin ensures that the **messages.yml** file exists. If it doesn't, it copies the default **messages.yml** file from the plugin's resources.
+
+## Changing the Language
+
+If you have other translations, you can set them from the server using the command `/logicgates language <language code>`. You can also do this by editing the `language` key in the **config.yml** file and reloading the configuration with the `/logicgates reload` command.

@@ -1,0 +1,47 @@
+---
+title: Building a logic gate
+---
+
+Creating logic gates using the **LogicGates** plugin is intuitive and does not require the complex mechanisms of redstone. Each gate fits into a single block, allowing you to build compact and advanced logic circuits without occupying too much space.
+
+## How It Works
+
+The core element of every logic gate is the `minecraft:glass` (Glass) block, which serves as the main component. This is where the input and output signals are connected.
+
+Each gate performs a specific logical operation based on the redstone signals provided at its inputs. The inputs are marked with **particle colors** to help with identification and proper connection:
+
+- **Red** – first input
+- **Blue** – second input
+- **Light Blue** – third input (for gates with three input signals)
+
+The gate's output is marked with a **green color** and transmits the result of the logical operation to other components in the circuit using redstone signals.
+
+## Creating a Gate
+
+To create a logic gate, follow these steps:
+
+1. **Place a Glass Block:**  
+   Place a `minecraft:glass` block, which will serve as the central point of the gate.
+2. **Add a Special Carpet Block:**  
+   Place a special carpet block on top of the glass. This carpet represents the specific type of gate.
+   - You can obtain these special carpets for building gates by using the command `/logicgates menu`, which displays a GUI with a list of available gates.
+3. **Connect the Input Signals:**  
+   Connect the input signals to the corresponding sides of the glass block according to the color coding.
+4. **Connect the Output Signal:**  
+   The result of the logical operation is passed on to other redstone components.
+   - Place a **lever, button, or observer block** on the **output side** of the gate and connect it to the next parts of your circuit (Why this is necessary will be explained in later sections of the documentation).
+
+With LogicGates, you can build gates such as **AND**, **OR**, **NOT**, **XOR**, **NOR**, **NAND**, and many others, enabling the creation of advanced digital circuits without the hassle of complex redstone wiring.
+
+## Who is the plugin aimed at?
+
+The LogicGates plugin is an ideal solution for both beginners learning the basics of digital logic and advanced players building intricate mechanisms in Minecraft. Its compact gate design can be used for a variety of projects, including:
+
+- Advanced door and lock systems
+- Security mechanisms
+- Automated farms controlled by logic
+- Simple processors and computational circuits
+
+The LogicGates plugin simplifies the process of building logic circuits in Minecraft, making the design of intelligent mechanisms more intuitive and efficient.
+
+![AND Gate](/andgate.png)

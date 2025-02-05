@@ -1,0 +1,25 @@
+---
+title: WorldEdit Integration
+---
+
+The plugin has implemented integration with the WorldEdit API. It enables automatic detection and registration of logic gates created using WorldEdit. The `WorldEditIntegration` class listens for the `EditSessionEvent` from WorldEdit, which is triggered during world modifications **(e.g., by commands like `//set`, `//copy`, `//paste`, or pasting schematics)**.
+
+The `onEditSession` method checks if the edit is performed by a player (`actor.isPlayer()`), and then wraps the edit session in a custom `AbstractDelegateExtent`. The overridden `getFullBlock` method intercepts block read/lock operations. For each block position (`BlockVector3`), it retrieves the corresponding Bukkit world. It schedules a synchronous task (`runTask`) that will perform the registration of logic gates after one tick.
+
+The `checkAndCreateGate` method checks if a pair of blocks (the base block and the carpet above it) forms a valid gate. The condition is that the base block must be glass (`Material.GLASS`).
+
+The carpet above it must be registered as "activation" carpet in the plugin's configuration (`plugin.hasActivationCarpet`). If the conditions are met, it creates a `GateData` object with the player's direction and the gate type.
+
+Logic gates are initialized, and the direction of the player performing the WorldEdit operation determines the orientation of the gate's inputs/outputs. In the future, the WorldEdit integration will be enhanced to support copying the direction of each gate individually.
+
+<Callout title="Warning!" type="error">
+  Currently, the integration does not copy the **directions of gates**. After
+  WorldEdit operations, the directions of gates are set to the current player's
+  direction. You can correct the directions of gates using the magic wand.
+</Callout>
+
+In some forks of WorldEdit, the integration maybe will not work correctly. It was originally designed for the version of WorldEdit created by `com.sk89q.worldedit`. Nevertheless, as soft dependencies in `plugin.yml`, WorldEdit, AsyncWorldEdit, and FastAsyncWorldEdit have been added.
+
+## Why is integration important?
+
+Players can quickly create complex gate structures using tools like `//copy` and `//paste`, instead of manually placing blocks. Gates are automatically registered during edits, without the need for a restart/reload.

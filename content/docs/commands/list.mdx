@@ -1,0 +1,83 @@
+---
+title: Command list
+---
+
+1. /logicgates debug
+   - **Description**: Toggles debug mode for the plugin. This is useful for developers or administrators to troubleshoot issues.
+   - **Permission**: `logicgates.admin`
+   - **Usage:** Only players with admin permissions can use this command. When activated, it provides detailed logs when gate output was changed.
+
+2. /logicgates menu
+   - **Description**: Opens a graphical user interface (GUI) that allows players to select logic gates.
+   - **Permission**: `logicgates.give`
+   - **Usage**: Players can use this command to access a menu where they can choose from various logic gates configured in the plugin. The GUI displays all available gates, and players can select one to use.
+
+3. /logicgates update
+   - **Description**: Checks for updates to the plugin. If an update is available, it notifies the user.
+   - **Permission**: `logicgates.admin`
+   - **Usage**: This command is intended for administrators to ensure the plugin is up-to-date with the latest version.
+
+4. /logicgates inspect
+   - **Description**: Activates inspection mode, allowing players to inspect logic gates in the world.
+   - **Permission**: `logicgates.inspect`
+   - **Usage**: Players can use this command to enter a mode where they can examine logic gates, view their properties, and troubleshoot issues.
+
+5. /logicgates rotate
+   - **Description**: Gives the player a "Rotation Wand" that can be used to rotate logic gates in the world.
+   - **Permission**: `logicgates.rotate`
+   - **Usage**: Players receive a special wand (a stick with a unique identifier) that allows them to right-click on logic gates to change their orientation.
+
+6. /logicgates toggleinput
+   - **Description**: Change number of inputs of selected logic gate.
+   - **Permission**: `logicgates.toggleinput`
+   - **Usage**: Players can use this command to enter a mode where they can toggle the inputs number of logic gates.
+
+7. /logicgates howto
+   - **Description**: Provides instructions and a link to the plugin's documentation for creating and using logic gates.
+   - **Permission**: None (available to all players)
+   - **Usage**: This command sends a clickable message with a link to the plugin's documentation, helping players learn how to use the plugin effectively.
+
+8. /logicgates help
+   - **Description**: Displays a list of available commands and their usage.
+   - **Permission**: None (available to all players)
+   - **Usage**: Players can use this command to get a summary of all commands and their purposes.
+
+9. /logicgates author
+   - **Description**: Displays information about the plugin's author, including contact details.
+   - **Permission**: None (available to all players)
+   - **Usage**: This command provides credits to the plugin's creator and may include links to contact the author for support or feedback.
+
+10. /logicgates save
+    - **Description**: Saves the current state of all logic gates to the plugin's configuration.
+    - **Permission**: `logicgates.admin`
+    - **Usage**: Administrators can use this command to manually save the state of all gates, ensuring that changes are persisted.
+
+11. /logicgates redstonecompatibility [on/off]
+    - **Description**: Toggles redstone compatibility for logic gates.
+    - **Permission**: `logicgates.admin`
+    - **Usage**: Administrators can enable or disable compatibility with redstone circuits.
+
+12. /logicgates fixparticles
+    - **Description**: Fixes issues with particle effects in the plugin.
+    - **Permission**: `logicgates.admin`
+    - **Usage**: Administrators can use this command to reload or reset particle effects, resolving any visual glitches.
+
+13. /logicgates particles [on/off]
+    - **Description**: Toggles particle effects for logic gates.
+    - **Permission**: `logicgates.admin`
+    - **Usage**: Administrators can enable or disable particle effects, which are used to visualize gate operations.
+
+14. /logicgates language [language_code]
+    - **Description**: Changes the plugin's language to the specified language code.
+    - **Permission**: `logicgates.admin`
+    - **Usage**: Administrators can use this command to switch the plugin's language to one of the supported options.
+
+15. /logicgates timer [seconds]
+    - **Description**: Sets a cooldown of TIMER gate.
+    - **Permission**: `logicgates.timer`
+    - **Usage**: Players can specify a cooldown time (in seconds) for TIMER gate.
+
+16. /logicgates reload
+    - **Description**: Reloads the plugin's configuration file.
+    - **Permission**: `logicgates.admin`
+    - **Usage**: Administrators can use this command to reload the plugin's configuration without restarting the server.

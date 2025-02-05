@@ -1,0 +1,11 @@
+---
+title: Rotating a logic gate
+---
+
+You can rotate logic gates, allowing you to change the position of their inputs and outputs. By default, when a gate is created, it faces the direction the player is looking. After entering the `/logicgates rotate` command, you will receive a magical wand – **"Rotation Wand"**, used for rotating gates.
+
+If the player already has the wand, the plugin does not add another one to their inventory but instead notifies them that they already possess it.
+
+The magical wand is an `minecraft:stick` item named **"Rotation Wand"** (in green) with the description: **"Right-click a logic gate to rotate it."**. It also has a unique identifier `customModelData = 1450`, which distinguishes it from regular sticks.
+
+When the wand is used on a gate block, the gate's data is retrieved, and it is rotated clockwise. After the rotation, the player receives a message indicating the new direction of the gate. All changes are saved to the `gates.json` file.

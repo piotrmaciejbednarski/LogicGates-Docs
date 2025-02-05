@@ -1,0 +1,73 @@
+---
+title: I/O support
+description: Input and output support
+---
+
+Plugin offer many ways to both receive an input signal from a gate and send input signals to a gate. Understanding the plugin’s custom mechanics will allow you to harness its full potential.
+
+Let’s start from the beginning. The plugin provides two modes for gate input handling — that is, the methods by which the gate receives its inputs. The **default mode is the “non-standard redstone logic” mode**, often referred to as the standard mode. There is also a second mode, known as the **“redstone compatibility mode”**.
+
+<div style={{ display: "flex", gap: "30px" }}>
+   <div>
+   ![Standard Mode](/defaultmode.png)
+
+   <figcaption style={{ marginTop: "-20px" }}>Standard Mode</figcaption>
+   </div>
+
+   <div>
+   ![Redstone Compatibility Mode](/compatibilitymode.png)
+
+   <figcaption style={{ marginTop: "-20px" }}>Redstone Compatibility Mode</figcaption>
+   </div>
+</div>
+
+The main difference between the two modes is that in compatibility mode, the gate inputs must be powered “directly” rather than indirectly as in the standard mode. In other words, in compatibility mode, for example, redstone dust or a repeater must point directly at the gate block, rather than simply being placed adjacent to it as is allowed in standard mode.
+
+These two modes allow for better control of input states and improved compatibility with vanilla redstone mechanics.
+
+You can switch between the two modes using the command `/logicgates redstonecompatibility <on/off>`. By default, compatibility mode is turned off. This setting can also be changed in the `config.yml` configuration file by modifying the `redstoneCompatibility` key.
+
+A redstone lamp can also be the input to the gate.
+
+## Gate Outputs
+
+Always ensure that a compatible and supported expander is placed on the gate’s output so that the output signal can be properly received. The plugin will only alert you in critical cases if the component you’ve connected to the gate output is not compatible and may cause errors. It is therefore recommended to use one of the following **supported expanders**:
+
+- **Functional blocks** such as levers, buttons, pressure plates, and observers **(maximum compatibility)**.
+  - When a redstone circuit is connected to these expanders, you can be confident that the signal will be flawless.
+- **Wooden doors, iron doors, trapdoors, and fence gates** (full compatibility).
+- **Repeaters and comparators** (partially discouraged).
+  - These can cause oscillations in many cases.
+- **Redstone lamps** (compatible).
+- **Furnaces and campfires** (compatible).
+  - Placing the circuit on these blocks will toggle their state.
+- **Redstone torches** (highly discouraged).
+  - They may cause oscillations.
+- **Pistons** (highly discouraged, as they cause errors).
+- **Redstone dust** (highly discouraged).
+
+<Callout>
+  It is recommended to use only functional blocks, such as levers, buttons,
+  pressure plates, and observers (observers can also transmit a signal in
+  different directions)
+</Callout>
+
+Why some of these materials don't work well? Often, when the state of a redstone component (like redstone dust or a repeater) changes, the game server automatically updates it. If a plugin tries to change the state at the same time, it can cause conflicts between the plugin and the server engine. This can lead to unexpected effects.
+
+Using "maximum compatibility" extenders ensures that the server won't check the state of the lever every tick, as this would be pointless for an interactive element. The plugin "simulates actions" which makes it work very well and stably.
+
+## Redstone Extenders
+
+When using levers or buttons as redstone extenders (to carry a signal over a distance), you don't need to place the lever or button directly on the Glass. You can place the lever or button on the floor or even on another block, as long as it's within one block of the output of the redstone circuit.
+
+This is useful because it gives you more flexibility in your redstone contraptions.
+
+### Example
+
+Imagine you have a door that's opened by a logic gate. The output of the circuit is a block that powers the door. You could place a lever directly on that block to open the door.
+
+## Output signal shifting
+
+If you place a regular carpet (any color) on the output of a logic gate, you can shift the output signal of the gate by one block.
+
+![Output shifting](/outputshift.png)
