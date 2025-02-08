@@ -13,6 +13,10 @@ const inter = Inter({
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
+      <meta name="description" content="Forget about giant Redstone logic gates. All logic gates in one block!" />
+      <meta name="keywords" content="redstone, minecraft plugin, spigot, bukkit, mechanics, logic gates minecraft" />
+      <meta name="author" content="Piotr Bednarski" />
+      <link rel="icon" href="/favicon.ico" />
       <body
         style={{
           display: 'flex',
