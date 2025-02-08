@@ -4,6 +4,7 @@ import 'fumadocs-ui/css/dusk.css';
 import 'fumadocs-twoslash/twoslash.css';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,7 +20,10 @@ export default function Layout({ children }: { children: ReactNode }) {
           minHeight: '100vh',
         }}
       >
-        <RootProvider>{children}</RootProvider>
+        <RootProvider>
+          {children}
+          <Analytics />
+        </RootProvider>
       </body>
     </html>
   );

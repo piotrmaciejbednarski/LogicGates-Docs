@@ -1,4 +1,4 @@
-"use client"; // Dodaj ten dyrektywę na początku pliku
+"use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
