@@ -72,3 +72,15 @@ Imagine you have a door that's opened by a logic gate. The output of the circuit
 If you place a regular carpet (any color) on the output of a logic gate, you can shift the output signal of the gate by one block.
 
 ![Output shifting](/outputshift.png)
+
+## Change the input direction of the NOT gate
+
+Since version **1.2.0** of the plugin, a way to change the input direction of the NOT gate has been added. To do this, configure the notGateInputPosition key in the `config.yml` file. You can set the value to default or opposite. The default value (`default`) sets the input position of the gate according to the old method. When changed to opposite, the input of the NOT gate will be reversed relative to the output of the gate (`opposite`). This is very useful when we want to build a layout that is kept in one line.
+
+```yaml
+# Define the position of the input for NOT gate
+# Options: default, opposite
+notGateInputPosition: default
+```
+
+![NOT Gate Input Position](/notgateinputposition.png)
