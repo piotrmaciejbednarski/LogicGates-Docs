@@ -2,24 +2,34 @@
 title: WorldEdit Integration
 ---
 
-The plugin has implemented integration with the WorldEdit API. It enables automatic detection and registration of logic gates created using WorldEdit. The `WorldEditIntegration` class listens for the `EditSessionEvent` from WorldEdit, which is triggered during world modifications **(e.g., by commands like `//set`, `//copy`, `//paste`, or pasting schematics)**.
+The plugin has implemented integration with the WorldEdit API. It enables automatic detection and registration of logic gates created using WorldEdit. The `WorldEditIntegration` class listens for the `EditSessionEvent` from WorldEdit, which is triggered during world modifications **(e.g., by commands like `//stack`, `//copy`, `//paste`, `//set`)**.
 
-The `onEditSession` method checks if the edit is performed by a player (`actor.isPlayer()`), and then wraps the edit session in a custom `AbstractDelegateExtent`. The overridden `getFullBlock` method intercepts block read/lock operations. For each block position (`BlockVector3`), it retrieves the corresponding Bukkit world. It schedules a synchronous task (`runTask`) that will perform the registration of logic gates after one tick.
+The integration ensures that gates retain their properties (direction, current output state, whether the gate is a 3-input type, gate delay TIMER) during WorldEdit operations by:
+1. Temporarily converting the base block of the logic gate to a chest, which contains a writable book (`Material.WRITABLE_BOOK`) with the gate data during pre-processing.
+2. Restoring the original gate properties after the WorldEdit operation is completed.
 
-The `checkAndCreateGate` method checks if a pair of blocks (the base block and the carpet above it) forms a valid gate. The condition is that the base block must be glass (`Material.GLASS`).
+## Pre-Processing
+- If a logic gate is detected during editing, it replaces the base block (GLASS) with a chest.
+- A book (ItemStack with `Material.WRITABLE_BOOK`) is placed in this chest.
+- The necessary gate data (e.g., direction, output state, interval, threeInput) is serialized into the book's `BookMeta` as JSON.
+- A task is scheduled with `Bukkit.getScheduler()` after 1 tick to revert all operations of replacing GLASS with a CHEST. However, in WorldEdit's memory, we already have chests with books.
 
-The carpet above it must be registered as "activation" carpet in the plugin's configuration (`plugin.hasActivationCarpet`). If the conditions are met, it creates a `GateData` object with the player's direction and the gate type.
+## Post-Processing
+- After the WorldEdit operation, the original logic gates are restored. This is first done by checking if a chest (on which a carpet representing the gate type is placed) contains a book with properties.
+- If the book is found, its BookMeta is read, the JSON is loaded, and the original properties are retrieved.
+- The base block of the gate is restored to its original GLASS form, and a new logic gate object is created with the original properties.
 
-Logic gates are initialized, and the direction of the player performing the WorldEdit operation determines the orientation of the gate's inputs/outputs. In the future, the WorldEdit integration will be enhanced to support copying the direction of each gate individually.
+The plugin also supports WorldEdit schematics. If a schematic contains logic gates, after pasting the schematic, the gates will be correctly registered in the plugin!
+
+![WorldEdit Integration](/worldedit-integration.png)
 
 <Callout title="Warning!" type="error">
-  Currently, the integration does not copy the **directions of gates**. After
-  WorldEdit operations, the directions of gates are set to the current player's
-  direction. You can correct the directions of gates using the magic wand.
+  In plugin versions lower than 1.2.1, the properties of logic gates are not reconstructed, and the direction of the logic gate is set to the direction of the player who performed the edit.
 </Callout>
 
+## Known issues
 In some forks of WorldEdit, the integration maybe will not work correctly. It was originally designed for the version of WorldEdit created by `com.sk89q.worldedit`. Nevertheless, as soft dependencies in `plugin.yml`, WorldEdit, AsyncWorldEdit, and FastAsyncWorldEdit have been added.
 
 ## Why is integration important?
 
-Players can quickly create complex gate structures using tools like `//copy` and `//paste`, instead of manually placing blocks. Gates are automatically registered during edits, without the need for a restart/reload.
+Players can quickly create complex gate structures using tools like `//copy`, `//paste`, `//stack`, instead of manually placing blocks. Gates are automatically registered during edits, without the need for a restart/reload.
